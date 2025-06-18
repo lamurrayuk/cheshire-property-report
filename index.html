@@ -100,50 +100,28 @@
             font-weight: bold;
         }
         .card-content { padding: 20px; }
+        
         .map-container {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 20px;
             margin: 30px 0;
-            text-align: center;
         }
-        .ascii-map {
-            background: #1a1a1a;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            padding: 20px;
+        #map {
+            height: 500px;
+            width: 100%;
             border-radius: 8px;
-            overflow-x: auto;
-            white-space: pre;
-            font-size: 12px;
-            line-height: 1.2;
+            border: 2px solid #ddd;
         }
-        .legend {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            padding: 15px;
-            background: white;
-            border-radius: 5px;
+        .fallback-map {
+            background: #e9ecef;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
         }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .tier1 { background: #27ae60; }
-        .tier2 { background: #3498db; }
-        .tier3 { background: #f39c12; }
-        .tier4 { background: #e74c3c; }
-        .tier5 { background: #95a5a6; }
-        .reference { background: #ff6b6b; }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -162,6 +140,7 @@
         .score-high { color: #27ae60; font-weight: bold; }
         .score-medium { color: #f39c12; font-weight: bold; }
         .score-low { color: #e74c3c; font-weight: bold; }
+        
         .location-summary {
             background: #f8f9fa;
             border-radius: 8px;
@@ -172,6 +151,8 @@
         .location-summary.excellent { border-left-color: #27ae60; background: #e8f5e8; }
         .location-summary.good { border-left-color: #3498db; background: #e3f2fd; }
         .location-summary.poor { border-left-color: #e74c3c; background: #ffebee; }
+        .location-summary.compromised { border-left-color: #f39c12; background: #fff8e1; }
+        
         .strengths-weaknesses {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -179,7 +160,7 @@
             margin: 15px 0;
         }
         .strengths, .weaknesses {
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
         }
         .strengths {
@@ -190,11 +171,32 @@
             background: #f8d7da;
             border-left: 4px solid #dc3545;
         }
+        
+        .property-examples {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .transport-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .transport-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+        }
+        
         @media (max-width: 768px) {
             .top-locations { flex-direction: column; }
             .location-card { min-width: auto; }
             .strengths-weaknesses { grid-template-columns: 1fr; }
-            .ascii-map { font-size: 10px; }
+            .transport-stats { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -205,7 +207,8 @@
             <div class="subtitle">£1M-£1.5M Detached Houses with 1+ Acres</div>
             <div style="margin-top: 15px; font-size: 0.9em;">
                 <strong>Budget:</strong> £1,000,000 - £1,500,000 | 
-                <strong>Requirements:</strong> Detached house, 1+ acres, semi-rural location
+                <strong>Requirements:</strong> Detached house, 1+ acres, semi-rural location<br>
+                <strong>Key Criteria:</strong> Community feel, countryside character, aesthetics & charm, transport links
             </div>
         </div>
 
@@ -237,7 +240,8 @@
                         </div>
                         <div class="card-content">
                             <p><strong>Why #1:</strong> Historic perfection with Grade I church, population 302, conservation protection, actual 1.2-1.5 acre properties available.</p>
-                            <p><strong>Available:</strong> Properties from £1.2M with substantial land</p>
+                            <p><strong>Available Now:</strong> Properties from £1.2M with substantial land in conservation area</p>
+                            <p><strong>Character:</strong> Authentic estate village with centuries of Arley Hall ownership</p>
                         </div>
                     </div>
                     
@@ -249,7 +253,8 @@
                         </div>
                         <div class="card-content">
                             <p><strong>Why #2:</strong> Excellent availability with current property at £1,075,000 for 1+ acre, expansion potential to 3+ acres.</p>
-                            <p><strong>Available:</strong> Multiple options with historic character</p>
+                            <p><strong>Available Now:</strong> Multiple options with historic character, workshop potential</p>
+                            <p><strong>Value:</strong> Best balance of features and immediate availability</p>
                         </div>
                     </div>
                     
@@ -261,7 +266,8 @@
                         </div>
                         <div class="card-content">
                             <p><strong>Why #3:</strong> Rural character with 1.3+ acres standard, potential for 18 acre expansion, UNESCO Jodrell Bank nearby.</p>
-                            <p><strong>Available:</strong> Best expansion potential in budget</p>
+                            <p><strong>Available Now:</strong> Rural properties with significant expansion potential</p>
+                            <p><strong>Opportunity:</strong> Best potential for creating substantial country estate</p>
                         </div>
                     </div>
                 </div>
@@ -282,7 +288,8 @@
                         </div>
                         <div class="card-content">
                             <p><strong>Why #1:</strong> Unmatched London transport (crucial for business), established professional community, excellent schools, heritage character.</p>
-                            <p><strong>Trade-off:</strong> Higher prices but world-class convenience</p>
+                            <p><strong>Trade-off:</strong> Higher prices but world-class convenience and established community</p>
+                            <p><strong>Lifestyle:</strong> Golden Triangle prestige with Conservation Area protection</p>
                         </div>
                     </div>
                     
@@ -294,7 +301,8 @@
                         </div>
                         <div class="card-content">
                             <p><strong>Why #2:</strong> Excellent value at £444k average, great transport to both Cheadle Hulme AND London, established community.</p>
-                            <p><strong>Sweet Spot:</strong> Balance of convenience and affordability</p>
+                            <p><strong>Sweet Spot:</strong> Balance of convenience and affordability with family amenities</p>
+                            <p><strong>Practical:</strong> Good transport without Golden Triangle premium</p>
                         </div>
                     </div>
                     
@@ -306,7 +314,8 @@
                         </div>
                         <div class="card-content">
                             <p><strong>Why #3:</strong> Outstanding Cheadle Hulme access (5 miles), established area, good amenities, larger plots on outskirts possible.</p>
-                            <p><strong>Practical:</strong> Best daily commute convenience</p>
+                            <p><strong>Practical:</strong> Best daily commute convenience with established infrastructure</p>
+                            <p><strong>Compromise:</strong> Less rural but maximum accessibility</p>
                         </div>
                     </div>
                 </div>
@@ -315,67 +324,35 @@
 
         <div class="map-container">
             <h2>Location Map</h2>
-            <div class="ascii-map">                    SOUTH MANCHESTER & CHESHIRE PROPERTY SEARCH AREAS
-                                                                      
-    NEW MILLS (55) ●                                              Peak District
-         ↑                                                            ↑
-    [Remote Peak District]                                             
-                                                                      
-                        MANCHESTER
-                           ●
-                     ✈ Manchester Airport
-                           
-    PLUMLEY (48) ●     KNUTSFORD (82) ●                         
-                                                                      
-                   GREAT BUDWORTH (94) ●🥇    WILMSLOW (58) ●        
-    TARPORLEY (91) ●🥈                                               
-                       GOOSTREY (85) ●        ALDERLEY EDGE (62) ●   
-                                                                      
-                                              PRESTBURY (65) ●       
-                   HOLMES CHAPEL (88) ●🥉                            
-                                              POYNTON (70) ●         
-                                                                      
-                                              BRAMHALL (72) ● ← CHEADLE HULME ★
-                                                                      
-                                              MACCLESFIELD (78) ●    
-                                                                      
-                                              ADLINGTON (66) ●       
-                                              BOLLINGTON (68) ●      
-                                                                      
-                                              RAINOW (52) ●          
-                                                                      
-                        ←─────── M56/M6 Corridor ───────→              
-                        ←─────── Rail to London ───────→               
-                                                                      
-    West Cheshire              Central Cheshire        East Cheshire/Peak District
-    (Rural Historic)           (Golden Triangle)       (Countryside/Remote)</div>
-            
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-dot tier1"></div>
-                    <span><strong>85+ Points</strong> - Top Tier (🥇🥈🥉)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot tier2"></div>
-                    <span><strong>70-84 Points</strong> - Good Options</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot tier3"></div>
-                    <span><strong>65-69 Points</strong> - Compromised</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot tier4"></div>
-                    <span><strong>Under 65 Points</strong> - Poor Value</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot tier5"></div>
-                    <span><strong>Impractical</strong> - Too Remote</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot reference"></div>
-                    <span><strong>★</strong> - Cheadle Hulme (Reference)</span>
-                </div>
+            <div id="map" class="fallback-map">
+                <h3>Interactive Map Loading...</h3>
+                <p>Map showing all 18 locations relative to Cheadle Hulme, Manchester Airport, and transport links.</p>
+                <p><em>If map doesn't load, see the detailed location coordinates and directions in the analysis below.</em></p>
             </div>
+        </div>
+
+        <h2>Actual Property Availability (£1M-£1.5M)</h2>
+        
+        <div class="property-examples">
+            <h3>🎯 PERFECT FIT PROPERTIES AVAILABLE NOW:</h3>
+            
+            <h4>Great Budworth:</h4>
+            <ul>
+                <li><strong>"Conservation Area Property":</strong> Large detached house within lovely landscaped gardens and grounds of just over 1.2 acres, boasting nearly 3000 square feet of versatile living space in the heart of the village conservation area</li>
+                <li><strong>"The Farthings":</strong> Set behind electric gates and nestled within approximately 1.5 acres of beautifully maintained private grounds, impressive and substantial Cheshire brick detached residence</li>
+            </ul>
+            
+            <h4>Tarporley Area (Eaton):</h4>
+            <ul>
+                <li><strong>£1,075,000:</strong> Situated in a sought after, quiet and picturesque village location and set in over 1 acre of south-west facing landscaped private gardens and paddock, a beautifully presented and extended detached family home with many original features and over 3,000 sq.ft</li>
+                <li><strong>Expansion Potential:</strong> Additional 2 acres of land adjoining the property with a 45' x 30' workshop available for separate negotiation</li>
+            </ul>
+            
+            <h4>Holmes Chapel:</h4>
+            <ul>
+                <li><strong>Rural Properties:</strong> Set in approximately 1.3 acres in rural Cheshire, spacious home with 3,000 sq. ft. featuring five reception rooms, four bedrooms, and three bathrooms</li>
+                <li><strong>Major Expansion:</strong> Additional 18 acres of agricultural land available by separate negotiation</li>
+            </ul>
         </div>
 
         <h2>Complete Analysis: All 18 Locations</h2>
@@ -551,122 +528,127 @@
 
         <h2>Individual Location Summaries</h2>
 
+        <h3>TIER 1: EXCELLENT CHOICES (85+ Points)</h3>
+
         <div class="location-summary excellent">
             <h3>🥇 Great Budworth (94/100) - Historic Village Perfection</h3>
             <p><strong>The clear winner for character and exclusivity</strong></p>
+            
+            <div class="transport-stats">
+                <div class="transport-item">
+                    <strong>Cheadle Hulme:</strong> 25 miles (35-40 minutes)
+                </div>
+                <div class="transport-item">
+                    <strong>London Trains:</strong> 2.5 hours via connections
+                </div>
+                <div class="transport-item">
+                    <strong>Manchester Airport:</strong> 30 miles (45 minutes)
+                </div>
+                <div class="transport-item">
+                    <strong>Population:</strong> 302 (ultimate exclusivity)
+                </div>
+            </div>
+            
             <div class="strengths-weaknesses">
                 <div class="strengths">
                     <h4>✅ Strengths</h4>
                     <ul>
                         <li>Historic perfection with Grade I listed church</li>
-                        <li>Conservation area protection</li>
+                        <li>Conservation area protection ensures character</li>
                         <li>Properties with 1.2-1.5 acres currently available</li>
                         <li>Population of just 302 ensures exclusivity</li>
                         <li>Authentic estate village character</li>
+                        <li>St Mary and All Saints' Church - architectural masterpiece</li>
+                        <li>For centuries owned by Arley Hall - genuine heritage</li>
+                        <li>Annual Soul Cakers Play brings community together</li>
                     </ul>
                 </div>
                 <div class="weaknesses">
                     <h4>❌ Considerations</h4>
                     <ul>
-                        <li>40+ minutes to Manchester Airport</li>
+                        <li>45+ minutes to Manchester Airport</li>
                         <li>Limited daily amenities due to small size</li>
                         <li>Moderate transport links to London</li>
-                        <li>May feel isolated for some</li>
+                        <li>May feel isolated for some lifestyles</li>
+                        <li>Small population means limited local services</li>
+                        <li>Running pump was only water source until 1934</li>
                     </ul>
                 </div>
             </div>
-            <p><strong>Best For:</strong> Those prioritizing heritage, character, and exclusivity above convenience</p>
-            <p><strong>Available Properties:</strong> Large detached house in conservation area, 1.2+ acres, nearly 3000 sq ft; "The Farthings" with electric gates and 1.5 acres</p>
+            
+            <div class="property-examples">
+                <h4>Available Properties:</h4>
+                <ul>
+                    <li><strong>Conservation Area Property:</strong> Large detached house, 1.2+ acres, nearly 3000 sq ft, heart of village</li>
+                    <li><strong>"The Farthings":</strong> Electric gates, 1.5 acres landscaped grounds, substantial Cheshire brick residence</li>
+                </ul>
+            </div>
+            
+            <p><strong>Best For:</strong> Those prioritizing heritage, character, and exclusivity above convenience. Perfect for creating a true English country lifestyle.</p>
         </div>
 
         <div class="location-summary excellent">
             <h3>🥈 Tarporley (91/100) - Best Overall Balance</h3>
             <p><strong>Excellent availability with historic market town character</strong></p>
+            
+            <div class="transport-stats">
+                <div class="transport-item">
+                    <strong>Cheadle Hulme:</strong> 28 miles (40 minutes)
+                </div>
+                <div class="transport-item">
+                    <strong>London Trains:</strong> 2+ hours via Chester/Manchester
+                </div>
+                <div class="transport-item">
+                    <strong>Manchester Airport:</strong> 35 miles (50 minutes)
+                </div>
+                <div class="transport-item">
+                    <strong>Character:</strong> Historic market town with thriving high street
+                </div>
+            </div>
+            
             <div class="strengths-weaknesses">
                 <div class="strengths">
                     <h4>✅ Strengths</h4>
                     <ul>
-                        <li>Excellent current availability (£1.075M example)</li>
+                        <li>Excellent current availability (£1.075M example available)</li>
                         <li>Historic market town with thriving high street</li>
                         <li>Expansion potential (additional 2 acres available)</li>
-                        <li>Award-winning villages in area</li>
-                        <li>Good amenities and services</li>
+                        <li>Award-winning "Best Kept Village" status</li>
+                        <li>Good amenities: boutiques, galleries, restaurants</li>
+                        <li>Two highly regarded golf courses</li>
+                        <li>Primary and secondary schools available</li>
+                        <li>Range of traditional pubs and eateries</li>
                     </ul>
                 </div>
                 <div class="weaknesses">
                     <h4>❌ Considerations</h4>
                     <ul>
                         <li>Further from airports than Golden Triangle</li>
-                        <li>London travel requires connections</li>
+                        <li>London travel requires connections via Chester</li>
                         <li>Not as exclusive as Great Budworth</li>
-                        <li>Some tourism impact</li>
+                        <li>Some tourism impact on village life</li>
+                        <li>Higher prices than more remote villages</li>
                     </ul>
                 </div>
             </div>
-            <p><strong>Best For:</strong> Families wanting village life with good services and expansion opportunities</p>
-            <p><strong>Available Properties:</strong> Eaton village property with 1+ acre, 3000+ sq ft, additional 2 acres and workshop available</p>
+            
+            <div class="property-examples">
+                <h4>Featured Property Example - Eaton Village:</h4>
+                <ul>
+                    <li><strong>Price:</strong> £1,075,000</li>
+                    <li><strong>Land:</strong> Over 1 acre + paddock</li>
+                    <li><strong>House:</strong> 3,000+ sq ft with original period features</li>
+                    <li><strong>Bonus:</strong> Additional 2 acres available with 45' x 30' workshop</li>
+                    <li><strong>Setting:</strong> Semi-rural "Best Kept" award winning village</li>
+                </ul>
+            </div>
+            
+            <p><strong>Best For:</strong> Families wanting village life with good services and expansion opportunities. Excellent immediate availability.</p>
         </div>
 
         <div class="location-summary excellent">
             <h3>🥉 Holmes Chapel (88/100) - Rural Character & Expansion</h3>
             <p><strong>Best for rural lifestyle and land acquisition</strong></p>
-            <div class="strengths-weaknesses">
-                <div class="strengths">
-                    <h4>✅ Strengths</h4>
-                    <ul>
-                        <li>Rural character with village amenities</li>
-                        <li>1.3+ acres standard, up to 18 acres possible</li>
-                        <li>Warm community atmosphere</li>
-                        <li>UNESCO Jodrell Bank Observatory nearby</li>
-                        <li>Excellent schools and facilities</li>
-                    </ul>
-                </div>
-                <div class="weaknesses">
-                    <h4>❌ Considerations</h4>
-                    <ul>
-                        <li>Limited upscale amenities</li>
-                        <li>Moderate transport connections</li>
-                        <li>45+ minutes to Manchester Airport</li>
-                        <li>Less sophisticated than market towns</li>
-                    </ul>
-                </div>
-            </div>
-            <p><strong>Best For:</strong> Those wanting significant land and rural lifestyle with modern conveniences</p>
-            <p><strong>Available Properties:</strong> Rural properties with 1.3+ acres, potential 18-acre expansion, 3000+ sq ft homes</p>
-        </div>
-
-        <div class="location-summary good">
-            <h3>Goostrey (85/100) - Pure Countryside Character</h3>
-            <p><strong>Rural setting near UNESCO World Heritage site</strong></p>
-            <div class="strengths-weaknesses">
-                <div class="strengths">
-                    <h4>✅ Strengths</h4>
-                    <ul>
-                        <li>Rural setting with traditional village life</li>
-                        <li>UNESCO Jodrell Bank Observatory</li>
-                        <li>Two pubs, village stores, community feel</li>
-                        <li>Low crime rates</li>
-                        <li>Open countryside access</li>
-                    </ul>
-                </div>
-                <div class="weaknesses">
-                    <h4>❌ Considerations</h4>
-                    <ul>
-                        <li>Limited property availability</li>
-                        <li>Distance from major amenities</li>
-                        <li>Moderate transport links</li>
-                        <li>Small population (2,200)</li>
-                    </ul>
-                </div>
-            </div>
-            <p><strong>Best For:</strong> Those seeking authentic rural life with historic/scientific heritage</p>
-        </div>
-
-        <div class="location-summary good">
-            <h3>Knutsford (82/100) - Historic Market Town</h3>
-            <p><strong>Historic character with good amenities</strong></p>
-            <div class="strengths-weaknesses">
-                <div class="strengths">
-                    <h4>✅ Strengths</h4>
-                    <ul>
-                        <li
+            
+            <div class="transport-stats">
+                <div class="transport-
